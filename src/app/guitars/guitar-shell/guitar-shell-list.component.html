@@ -1,0 +1,40 @@
+<div class="panel panel-primary" *ngIf="filteredGuitars">
+  <div class="panel-heading">
+    {{selectedBrand.brandName + ' Guitars'}}
+  </div>
+  <div class="table-responsive" *ngIf="filteredGuitars?.length">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Model</th>
+        <th>Price</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Rating</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let guitar of filteredGuitars">
+        <td>
+          <a [routerLink]="['/guitars', guitar.id]">
+            {{guitar.modelNumber}}
+          </a>
+        </td>
+        <td>{{guitar.price | currency:'USD':'symbol':'1.2-2'}}</td>
+        <td>{{guitar.guitarType === 1 ? 'Acoustic' : 'Electric'}}</td>
+        <td>{{guitar.description}}</td>
+        <td>
+          <gtr-star [rating]="guitar.rating"></gtr-star>
+        </td>
+        <td>
+          <a class="btn btn-primary"
+             [routerLink]="['/guitars', guitar.id, 'edit']"
+          >
+            Edit
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,219 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{pageTitle}}
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal"
+          novalidate
+          (ngSubmit)="addGuitar()"
+          [formGroup]="guitarForm"
+    >
+      <fieldset>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="col-md-4 control-label"
+                     for="guitarBrandId"
+              >Brand</label>
+              <div class="col-md-6">
+                <select class="form-control"
+                        id="guitarBrandId"
+                        formControlName="brandId"
+                        required
+                        (click)="onBrand()"
+                        >
+                  <option *ngFor="let brand of guitarBrands"
+                          [ngValue]="brand.id">
+                    {{brand.brandName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': displayMessage.modelNumber}">
+              <label class="col-md-4 control-label"
+                     for="guitarModelId">Model</label>
+              <div class="col-md-6">
+                <input class="form-control"
+                       placeholder="Model# (required)"
+                       type="text"
+                       id="guitarModelId"
+                       formControlName="modelNumber"
+                       maxlength="15">
+                <span class="help-block">
+                   {{displayMessage.modelNumber}}
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Guitar Type</label>
+              <div class="col-md-8">
+                <label class="radio-inline">
+                  <input type="radio"
+                         name="guitarType"
+                         formControlName="guitarType"
+                         id="guitarTypeAccId"
+                         [value]="1"
+                         >Acoustic
+                </label>
+                <label class="radio-inline">
+                  <input type="radio"
+                         name="guitarType"
+                         formControlName="guitarType"
+                         id="guitarTypeElecId"
+                         [value]="2"
+                         >Electric
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'has-error': displayMessage.price}">
+              <label class="col-md-3 control-label"
+                     for="guitarPriceId">Price</label>
+              <div class="col-md-8">
+                <input class="form-control"
+                       id="guitarPriceId"
+                       placeholder="Price (required)"
+                       currencyMask
+                       formControlName="price">
+                <span class="help-block">
+                   {{displayMessage.price}}
+                </span>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': displayMessage.description}">
+              <label class="col-md-3 control-label"
+                     for="guitarDescriptionId">Description</label>
+              <div class="col-md-8">
+                <textarea class="form-control"
+                          id="guitarDescriptionId"
+                          placeholder="Description (required)"
+                          formControlName="description"
+                          rows="3" cols="50"
+                          maxlength="100"
+                ></textarea>
+                <span class="help-block">
+                   {{displayMessage.description}}
+                </span>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': displayMessage.rating}">
+              <label class="col-md-3 control-label"
+                     for="guitarRatingId"
+              >Rating</label>
+              <div class="col-md-8">
+                <input class="form-control"
+                       id="guitarRatingId"
+                       type="number"
+                       min="{{minRatingNum}}" max="{{maxRatingNum}}"
+                       formControlName="rating"
+                />
+                <span class="help-block">
+                   {{displayMessage.rating}}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="col-md-4 control-label">String Type</label>
+              <div class="col-md-8">
+                <label class="radio-inline">
+                  <input type="radio"
+                         formControlName="stringType"
+                         id="guitarStringTypeStlId"
+                         value="steel"
+                         >Steel
+                </label>
+                <label class="radio-inline">
+                  <input type="radio"
+                         formControlName="stringType"
+                         id="guitarStringTypeNylId"
+                         value="nylon"
+                         >Nylon
+                </label>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': displayMessage.numberOfStrings}">
+              <label class="col-md-4 control-label"
+                     for="guitarStringQtyId"
+              >Strings</label>
+              <div class="col-md-8">
+                <input class="form-control"
+                       id="guitarStringQtyId"
+                       type="number"
+                       min="{{minStringQty}}" max="{{maxStringQty}}"
+                       formControlName="numberOfStrings"
+                       placeholder="Strings (required)"
+                />
+                <span class="help-block">
+                   {{displayMessage.numberOfStrings}}
+                </span>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': displayMessage.numberOfFrets}">
+              <label class="col-md-4 control-label"
+                     for="guitarFretsId"
+              >Frets</label>
+              <div class="col-md-8">
+                <input class="form-control"
+                       id="guitarFretsId"
+                       type="number"
+                       min="{{minFretQty}}" max="{{maxFretQty}}"
+                       formControlName="numberOfFrets"
+                       placeholder="Fret qty (required)"
+                />
+                <span class="help-block">
+                   {{displayMessage.numberOfFrets}}
+                </span>
+              </div>
+            </div>
+            <div class="form-group" [ngClass]="{'has-error': displayMessage.scaleLength}">
+              <label class="col-md-4 control-label"
+                     for="guitarScaleLengthId"
+              >Scale Length
+              </label>
+              <div class="col-md-8">
+                <input class="form-control"
+                       id="guitarScaleLengthId"
+                       type="number"
+                       min="{{minScaleLength}}" max="{{maxScaleLength}}"
+                       formControlName="scaleLength"
+                       placeholder="Scale length (required)"
+                />
+                <span class="help-block">
+                   {{displayMessage.scaleLength}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-4 col-md-offset-1">
+            <span>
+              <button class="btn btn-primary"
+                      type="submit"
+                      style="width: 80px;margin-right: 10px"
+                      [title]="guitarForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                      [disabled]="!guitarForm.valid"
+              >Save</button>
+            </span>
+            <span>
+             <a class="btn btn-default"
+                style="width:80px;margin-right: 2px"
+                (click)="cancel()"
+                title="Cancel your edits"
+             >
+                Cancel
+             </a>
+           </span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    Error: {{errorMessage}}
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{pageTitle}}
+  </div>
+
+  <div class="panel-body">
+    <div class="list-group">
+      <button type="button"
+              class="list-group-item"
+              *ngFor="let brand of guitarBrands"
+              (click)="onSelected(brand)"
+              [ngClass]="{'active': brand.id === selectedBrand?.id}"
+      >
+        {{brand.brandName}}
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf='errorMessage' class="alert alert-danger">
+  Error: {{ errorMessage }}
+</div>

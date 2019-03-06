@@ -1,0 +1,97 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{pageTitle}}
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal"
+          novalidate
+          (ngSubmit)="saveGuitar()"
+          [formGroup]="guitarForm">
+     <fieldset *ngIf="guitar">
+       <div class="form-group" [ngClass]="{'has-error': displayMessage.price}">
+         <label class="col-md-2 control-label"
+                for="guitarPriceId">Price</label>
+         <div class="col-md-2">
+           <input class="form-control"
+                  id="guitarPriceId"
+                  formControlName="price"
+                  placeholder="Price (required)"
+                  currencyMask
+           >
+           <span class="help-block">
+             {{displayMessage.price}}
+           </span>
+         </div>
+       </div>
+       <div class="form-group"
+            [ngClass]="{'has-error': displayMessage.description}"
+       >
+         <label class="col-md-2 control-label"
+                for="guitarDescriptionId">Description</label>
+         <div class="col-md-4">
+           <textarea class="form-control"
+                     id="guitarDescriptionId"
+                     formControlName="description"
+                     placeholder="Description (required)"
+                     rows="3" cols="50"
+                     maxlength="100"
+           ></textarea>
+           <span class="help-block">
+             {{displayMessage.description}}
+           </span>
+         </div>
+       </div>
+       <div class="form-group" [ngClass]="{'has-error': displayMessage.rating}">
+         <label class="col-md-2 control-label"
+                for="guitarRatingId"
+         >Rating</label>
+         <div class="col-md-2">
+           <input class="form-control"
+                  id="guitarRatingId"
+                  formControlName="rating"
+                  type="number"
+                  min="0" max="5"
+           />
+           <span class="help-block">
+             {{ displayMessage.rating }}
+           </span>
+         </div>
+       </div>
+
+       <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+
+       <div class="form-group">
+         <div class="col-md-4 col-md-offset-2">
+           <span>
+             <button class="btn btn-primary"
+                     type="submit"
+                     style="width: 80px;margin-right: 10px"
+                     [title]="guitarForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                     [disabled]="!guitarForm.valid">Save</button>
+           </span>
+           <span>
+             <a class="btn btn-default"
+                style="width:80px;margin-right: 2px"
+                (click)="cancel()"
+                title="Cancel your edits"
+             >
+                Cancel
+             </a>
+           </span>
+           <span>
+             <a class="btn btn-default" style="width:80px"
+                (click)="deleteGuitar()"
+                title="Delete this guitar?"
+             >
+                Delete
+             </a>
+           </span>
+         </div>
+       </div>
+     </fieldset>
+    </form>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    Error: {{errorMessage}}
+  </div>
+</div>

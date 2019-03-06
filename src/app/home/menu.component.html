@@ -1,0 +1,16 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <a class="navbar-brand">{{pageTitle}}</a>
+    <ul class="nav navbar-nav">
+      <li routerLinkActive="active">
+        <a routerLink='/welcome'>Home</a>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink='/guitars'>Guitar Brands</a>
+      </li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a [routerLink]="['/guitars', 'add']">Add Guitar</a>
+      </li>
+    </ul>
+  </div>
+</nav>
